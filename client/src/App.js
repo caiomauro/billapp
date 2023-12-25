@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import LoadData from "./Components/load-data"
 
 function App() {  
 
@@ -34,47 +35,40 @@ function App() {
 
   // HTML sent to Index.js to be rendered at ID = root (did not change this much to keep assignment simple and clean)
   return (
-    <div>
-      {loading ? ( //Loading variable is used here to control displaying of data, when false it check for the backendData variable
-        <p>Loading...</p>
-      ) : (
-        (typeof backendData.file === 'undefined') ? ( //If empty it will display a message to the user
-          <p>Please use the buttons below to show the available data.</p>
-        ) : (
-          backendData.file.map((bill, i) => ( //If it has data, it will display the data in the HTML
-            <p key={i}>{bill.name} {bill.address} {bill.hospital} {bill.date} {bill.amount}</p>
-          ))
-        )
-      )}
-      <button onClick={handleClick}>Load Current Bills</button>
-      <form>
-        <label>
-          Name:
-          <input type="text" name="name" id = "name" />
-        </label>
-        <br/>
-        <label>
-          Address:
-          <input type="text" name="address" id = "address" />
-        </label>
-        <br/>
-        <label>
-          Hospital:
-          <input type="text" name="hospital" id = "hospital" />
-        </label>
-        <br/>
-        <label>
-          Date (Month/Day/Year):
-          <input type="text" name="date" id = "date" />
-        </label>
-        <br/>
-        <label>
-          Amount:
-          <input type="text" name="amount" id = "amount" />
-        </label>
-        <br/>
-        <button onClick={handleAddBill}>Add Bill</button>
-      </form>
+    <div className="border">
+      <div className="flex flex-col max-h-72 overflow-auto border">
+        <LoadData />
+      </div>
+      <div className="flex">
+        <form className="flex flex-col text-center w-5/6 gap-2">
+          <label className="text-xl font-bold">
+            Name:
+          </label>
+          <input className="rounded-md" type="text" name="name" id = "name" />
+
+          <label className="text-xl font-bold">
+            Address:
+          </label>
+          <input className="rounded-md" type="text" name="address" id = "address" />
+
+          <label className="text-xl font-bold">
+            Hospital:
+          </label>
+          <input className="rounded-md" type="text" name="hospital" id = "hospital" />
+
+          <label className="text-xl font-bold">
+            Date (Month/Day/Year):
+          </label>
+          <input className="rounded-md" type="text" name="date" id = "date" />
+
+          <label className="text-xl font-bold">
+            Amount:
+          </label>
+          <input className="rounded-md" type="text" name="amount" id = "amount" />
+
+          <button className="rounded-md bg-indigo-500 p-1 px-3" onClick={handleAddBill}>Add Bill</button>
+        </form>
+      </div>
     </div>
   );
 };
